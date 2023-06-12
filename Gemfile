@@ -22,6 +22,9 @@ gem 'dry-validation', '~> 1.5.0'
 gem 'activesupport', '~> 6.0.0', require: false
 gem 'fast_jsonapi', '~> 1.5'
 
+gem 'faraday', '~> 1.0.1'
+gem 'faraday_middleware', '~> 1.0.0'
+
 group :development, :test do
   gem 'pry'
 end
