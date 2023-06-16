@@ -1,5 +1,5 @@
 class AdRoutes < Application
-  helpers PaginationLinks, Auth
+  helpers PaginationLinks, Auth, Geocoder
 
   namespace '/v1' do
     get do
@@ -16,7 +16,8 @@ class AdRoutes < Application
 
       result = Ads::CreateService.call(
         ad: ad_params[:ad],
-        user_id: user_id
+        user_id: user_id,
+        coordinates: coordinates
       )
 
       if result.success?

@@ -10,11 +10,18 @@ module Ads
 
     option :user_id
 
+    option :coordinates do
+      option :lat, optional: true
+      option :lon, optional: true
+    end
+
     attr_reader :ad
 
     def call
       @ad = ::Ad.new(@ad.to_h)
       @ad.user_id = @user_id
+      @ad.lat = @coordinates.lat
+      @ad.lon = @coordinates.lon
 
       if @ad.valid?
         @ad.save

@@ -13,12 +13,12 @@ RSpec.describe Ads::CreateService do
     end
 
     it 'creates a new ad' do
-      expect { subject.call(ad: ad_params, user_id: user_id) }
+      expect { subject.call(ad: ad_params, user_id: user_id, coordinates: {}) }
         .to change { Ad.count }.from(0).to(1)
     end
 
     it 'assigns ad' do
-      result = subject.call(ad: ad_params, user_id: user_id)
+      result = subject.call(ad: ad_params, user_id: user_id, coordinates: {})
 
       expect(result.ad).to be_kind_of(Ad)
     end
@@ -34,12 +34,12 @@ RSpec.describe Ads::CreateService do
     end
 
     it 'does not create ad' do
-      expect { subject.call(ad: ad_params, user_id: user_id) }
+      expect { subject.call(ad: ad_params, user_id: user_id, coordinates: {}) }
         .not_to change { Ad.count }
     end
 
     it 'assigns ad' do
-      result = subject.call(ad: ad_params, user_id: user_id)
+      result = subject.call(ad: ad_params, user_id: user_id, coordinates: {})
 
       expect(result.ad).to be_kind_of(Ad)
     end
