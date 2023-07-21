@@ -9,6 +9,7 @@ module Ads
     end
 
     option :user_id
+    option :geocoder_service, default: proc { GeocoderService::RpcClient.new }
 
     option :coordinates do
       option :lat, optional: true
@@ -25,6 +26,7 @@ module Ads
 
       if @ad.valid?
         @ad.save
+        @geocoder_service.geocode_later(@ad)
       else
         fail!(@ad.errors)
       end
