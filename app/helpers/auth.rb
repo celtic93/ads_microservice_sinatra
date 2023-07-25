@@ -15,7 +15,7 @@ module Auth
   private
 
   def auth_service
-    @auth_service ||= AuthService::Client.new
+    @auth_service ||= AuthService::RpcClient.new
   end
 
   def matched_token
