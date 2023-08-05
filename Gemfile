@@ -25,6 +25,8 @@ gem 'fast_jsonapi', '~> 1.5'
 gem 'bunny', '~> 2.15.0'
 gem 'faraday', '~> 1.0.1'
 gem 'faraday_middleware', '~> 1.0.0'
+gem 'rack-ougai', '~> 0.2.1'
+gem 'rack-request-id', '~> 0.0.4'
 
 group :development, :test do
   gem 'pry'

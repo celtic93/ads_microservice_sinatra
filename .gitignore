@@ -1,2 +1,8 @@
+/log/*
+!/log/.keep
+
 .ruby-version
 Gemfile.lock
+
+config/settings.local.yml
+config/settings/*.local.yml
