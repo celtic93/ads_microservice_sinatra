@@ -5,6 +5,7 @@ module AuthService
     def auth(token)
       response = connection.post('auth') do |request|
         request.headers['Authorization'] = "Bearer #{token}"
+        request.headers['X-Request-Id'] = Thread.current[:request_id]
       end
 
       response.body.dig('meta', 'user_id') if response.success?

@@ -3,7 +3,7 @@ Application.configure do |app|
 
   logger.before_log = lambda do |data|
     data[:service] = { name: Settings.app.name }
-    data[:request_id] ||= Thread.current[:request_id]&.to_i(36)&.to_s&.chars&.last(15)&.join
+    data[:request_id] ||= Thread.current[:request_id]
   end
 
   app.set :logger, logger

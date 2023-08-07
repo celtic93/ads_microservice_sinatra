@@ -14,7 +14,14 @@ module AuthService
     def auth(token)
       subscribe_to_reply_queue
       payload = { token: token }.to_json
-      channel.queue('auth', durable: true).publish(payload, type: 'auth', correlation_id: @correlation_id)
+      channel.queue('auth', durable: true).publish(
+        payload,
+        type: 'auth',
+        correlation_id: @correlation_id,
+        headers: {
+          request_id: Thread.current[:request_id]
+        }
+      )
 
       @lock.synchronize { @condition.wait(@lock) }
 
@@ -40,6 +47,8 @@ module AuthService
         if properties[:correlation_id] == @correlation_id
           @user_id = JSON.parse(payload)['user_id']
           channel.queue('auth.rabbitmq.reply-to').publish('', correlation_id: properties.correlation_id)
+          Thread.current[:request_id] = properties.headers['request_id']
+          Application.logger.info('auth user_id', user_id: @user_id)
 
           # sends the signal to continue the execution of #call
           @lock.synchronize { @condition.signal }
