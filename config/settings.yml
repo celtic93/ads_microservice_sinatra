@@ -11,3 +11,4 @@ rabbitmq:
 logger:
   path: log/app.log
   level: info
+env: <%= ENV['RACK_ENV'] %>
